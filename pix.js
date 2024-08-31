@@ -62,30 +62,30 @@ function getQRCodeText(amount) {
 function getQRCodeImage(amount) {
     // Adicione os caminhos das imagens dos QR codes aqui
     const qrImages = {
-        5: '/qrcode/qrcode5.png',
-        10: '/qrcode/qrcode10.png',
-        15: '/qrcode/qrcode15.png',
-        20: '/qrcode/qrcode20.png',
-        25: '/qrcode/qrcode25.png',
-        30: '/qrcode/qrcode30.png',
-        35: '/qrcode/qrcode35.png',
-        40: '/qrcode/qrcode40.png',
-        45: '/qrcode/qrcode45.png',
-        50: '/qrcode/qrcode50.png',
-        55: '/qrcode/qrcode55.png',
-        60: '/qrcode/qrcode60.png',
-        65: '/qrcode/qrcode65.png',
-        70: '/qrcode/qrcode70.png',
-        75: '/qrcode/qrcode75.png',
-        80: '/qrcode/qrcode80.png',
-        85: '/qrcode/qrcode85.png',
-        90: '/qrcode/qrcode90.png',
-        95: '/qrcode/qrcode95.png',
-        100: '/qrcode/qrcode100.png',
+        5: 'qrcode5.png',
+        10: 'qrcode10.png',
+        15: 'qrcode15.png',
+        20: 'qrcode20.png',
+        25: 'qrcode25.png',
+        30: 'qrcode30.png',
+        35: 'qrcode35.png',
+        40: 'qrcode40.png',
+        45: 'qrcode45.png',
+        50: 'qrcode50.png',
+        55: 'qrcode55.png',
+        60: 'qrcode60.png',
+        65: 'qrcode65.png',
+        70: 'qrcode70.png',
+        75: 'qrcode75.png',
+        80: 'qrcode80.png',
+        85: 'qrcode85.png',
+        90: 'qrcode90.png',
+        95: 'qrcode95.png',
+        100: 'qrcode100.png',
         // Adicione mais caminhos conforme necessário
     };
 
-    return qrImages[amount] || '/qrcode/default.png'; // Caminho padrão se o QR code não for encontrado
+    return qrImages[amount] || 'default.png'; // Caminho padrão se o QR code não for encontrado
 }
 
 function copyToClipboard(text) {
