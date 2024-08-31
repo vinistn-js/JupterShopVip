@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loja Virtual</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Link para o ícone do carrinho -->
+    <link href='https://cdn.jsdelivr.net/npm/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <script src="verificaHorario.j"></script>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1><a href="#"><img class="logo" src="JupterShop.png" alt="Logo"></a></h1>
+    
+            <div class="cart-container">
+                <button id="cart-btn" onclick="openCartModal()">
+                    <i class='bx bxs-cart-add'></i>Carrinho (<span id="cart-count">0</span>)
+                </button>
+            </div>
+        </div>
+    </header>
+    
+    
+
+    <main>
+        <section class="products">
+            <div class="container">
+                <!-- Produtos (adicione mais produtos conforme necessário) -->
+                <article class="product">
+                    <img src="https://via.placeholder.com/300" alt="Produto 1">
+                    <h3>Produto 1</h3>
+                    <p>Descrição do produto 1.</p>
+                    <p>R$ 10,00</p>
+                    <button onclick="addToCart('Produto 1', 10, 'https://via.placeholder.com/300')">Adicionar ao Carrinho</button>
+                </article>
+                <article class="product">
+                    <img src="https://via.placeholder.com/300" alt="Produto 2">
+                    <h3>Produto 2</h3>
+                    <p>Descrição do produto 2.</p>
+                    <p>R$ 15,00</p>
+                    <button onclick="addToCart('Produto 2', 15, 'https://via.placeholder.com/300')">Adicionar ao Carrinho</button>
+                </article>
+                <!-- Adicione mais produtos para testar a paginação -->
+                <article class="product">
+                    <img src="https://via.placeholder.com/300" alt="Produto 3">
+                    <h3>Produto 3</h3>
+                    <p>Descrição do produto 3.</p>
+                    <p>R$ 20,00</p>
+                    <button onclick="addToCart('Produto 3', 20, 'https://via.placeholder.com/300')">Adicionar ao Carrinho</button>
+                </article>
+                <article class="product">
+                    <img src="https://via.placeholder.com/300" alt="Produto 4">
+                    <h3>Produto 4</h3>
+                    <p>Descrição do produto 4.</p>
+                    <p>R$ 25,00</p>
+                    <button onclick="addToCart('Produto 4', 25, 'https://via.placeholder.com/300')">Adicionar ao Carrinho</button>
+                </article>
+                <article class="product">
+                    <img src="https://via.placeholder.com/300" alt="Produto 5">
+                    <h3>Produto 5</h3>
+                    <p>Descrição do produto 5.</p>
+                    <p>R$ 30,00</p>
+                    <button onclick="addToCart('Produto 5', 30, 'https://via.placeholder.com/300')">Adicionar ao Carrinho</button>
+                </article>
+                <article class="product">
+                    <img src="https://via.placeholder.com/300" alt="Produto 6">
+                    <h3>Produto 6</h3>
+                    <p>Descrição do produto 6.</p>
+                    <p>R$ 35,00</p>
+                    <button onclick="addToCart('Produto 6', 35, 'https://via.placeholder.com/300')">Adicionar ao Carrinho</button>
+                </article>
+                <article class="product">
+                    <img src="https://via.placeholder.com/300" alt="Produto 7">
+                    <h3>Produto 7</h3>
+                    <p>Descrição do produto 7.</p>
+                    <p>R$ 40,00</p>
+                    <button onclick="addToCart('Produto 7', 40, 'https://via.placeholder.com/300')">Adicionar ao Carrinho</button>
+                </article>
+                <article class="product">
+                    <img src="https://via.placeholder.com/300" alt="Produto 8">
+                    <h3>Produto 8</h3>
+                    <p>Descrição do produto 8.</p>
+                    <p>R$ 45,00</p>
+                    <button onclick="addToCart('Produto 8', 45, 'https://via.placeholder.com/300')">Adicionar ao Carrinho</button>
+                </article>
+                <article class="product">
+                    <img src="https://via.placeholder.com/300" alt="Produto 9">
+                    <h3>Produto 9</h3>
+                    <p>Descrição do produto 9.</p>
+                    <p>R$ 50,00</p>
+                    <button onclick="addToCart('Produto 9', 50, 'https://via.placeholder.com/300')">Adicionar ao Carrinho</button>
+                </article>
+                <!-- Adicione mais produtos se necessário -->
+                 
+            </div>
+            <!-- Contêiner de paginação -->
+            <div class="pagination">
+                <button class="pagination-btn" id="prev-page" onclick="changePage(-1)">&#60;</button>
+                <button class="pagination-btn active" data-page="1">1</button>
+                <button class="pagination-btn disabled" id="page-2" data-page="2" disabled>2</button>
+                <button class="pagination-btn disabled" id="page-3" data-page="3" disabled>3</button>
+                <!-- Adicione mais botões conforme necessário -->
+                <button class="pagination-btn" id="next-page" onclick="changePage(1)">&#62;</button>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <div class="container">
+            <div class="footer-top">
+                <div class="footer-logo">
+                    <img src="JupterShop.png" alt="Logo">
+                    <p>© JupterShop. Todos os direitos reservados.</p>
+                </div>
+                <div class="footer-nav">
+                    <h4>Links Rápidos</h4>
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Produtos</a></li>
+                        <li><a href="#">Sobre</a></li>
+                        <li><a href="#">Contato</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h4>Contato</h4>
+                    <p>Email: contato@minhaloja.com</p>
+                    <p>Telefone: (11) 1234-5678</p>
+                    <p>Endereço: Rua Exemplo, 123, São Paulo - SP</p>
+                </div>
+                <div class="footer-social">
+                    <h4>Siga-nos</h4>
+                    <a href="#" class="social-icon"><i class='bx bxl-facebook'></i></a>
+                    <a href="#" class="social-icon"><i class='bx bxl-twitter'></i></a>
+                    <a href="#" class="social-icon"><i class='bx bxl-instagram'></i></a>
+                    <a href="#" class="social-icon"><i class='bx bxl-linkedin'></i></a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>Desenvolvido por <a href="https://www.instagram.com/euvinistn">@vinistn.br</a></p>
+            </div>
+        </div>
+    </footer>
+    
+
+    <!-- Modal do Carrinho -->
+    <div id="cart-modal" class="cart-modal">
+        <div class="cart-modal-content">
+            <span class="cart-close" onclick="closeCartModal()">&times;</span>
+            <div class="modal-body">
+                <div class="cart-items">
+                    <ul id="cart-items-modal"></ul>
+                </div>
+                <div class="modal-actions">
+                    <div class="coupon-card">
+                        <h4>Adicionar Cupom</h4>
+                        <input type="text" id="coupon-code" placeholder="Digite o código do cupom">
+                        <button onclick="applyCoupon()">Aplicar</button>
+                        <p id="coupon-message"></p> <!-- Mensagem de cupom aplicado -->
+                    </div>
+                    <button id="checkout-btn" >Finalizar Pedido</button>
+                    <p id="cart-total">Total: R$ 0,00</p> <!-- Total -->
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="cupom.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
+

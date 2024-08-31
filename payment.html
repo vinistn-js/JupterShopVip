@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pagamento com Pix</title>
+    <style>
+        /* Estilos para o conteúdo existente */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f9fc;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+        h1 {
+            color: #007bff;
+            text-align: center;
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+        .pix-info {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .pix-info p {
+            font-size: 16px;
+            margin: 10px 0;
+        }
+        .pix-info strong {
+            color: #007bff;
+        }
+        #total-amount {
+            font-weight: 700;
+            color: #28a745;
+        }
+        .code-container textarea {
+            width: 97%;
+            height: 60px;
+            padding: 10px;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            font-size: 14px;
+            color: #495057;
+            margin-bottom: 10px;
+            resize: none;
+            cursor: pointer;
+            text-align: center; /* Centraliza o texto horizontalmente */
+        }
+
+        .copy-button {
+            background-color: #007bff;
+            color: #ffffff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            display: block;
+            margin: 10px auto;
+        }
+        .copy-button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Estilos para o minichat */
+        .support-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #007bff;
+            color: #ffffff;
+            border: none;
+            padding: 15px;
+            border-radius: 100px;
+            cursor: pointer;
+            font-size: 24px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            z-index: 1001;
+        }
+        .support-button:hover {
+            background-color: #0056b3;
+        }
+        .minichat {
+            position: fixed;
+            bottom: 80px;
+            right: 20px;
+            width: 300px;
+            height: 400px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            display: none;
+            flex-direction: column;
+            z-index: 1000;
+        }
+        .minichat-header {
+            background-color: #007bff;
+            color: #ffffff;
+            padding: 10px;
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .minichat-header h3 {
+            margin: 0;
+        }
+        .minichat-header .close-btn {
+            background-color: transparent;
+            border: none;
+            color: #ffffff;
+            font-size: 20px;
+            cursor: pointer;
+        }
+        .minichat-body {
+            padding: 10px;
+            flex-grow: 1;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+        }
+        .minichat-footer {
+            display: flex;
+            border-top: 1px solid #e0e0e0;
+            padding: 10px;
+            background-color: #f7f9fc;
+        }
+        .minichat-footer input {
+            flex-grow: 1;
+            padding: 10px;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+        .minichat-footer button {
+            background-color: #007bff;
+            color: #ffffff;
+            border: none;
+            padding: 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            margin-left: 10px;
+        }
+        .minichat-footer button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Estilos para as mensagens do chat */
+        .chat-message {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 10px;
+        }
+        .chat-message.robot {
+            flex-direction: row; /* Mensagens do robô à esquerda */
+        }
+        .chat-message.user {
+            flex-direction: row-reverse; /* Mensagens do usuário à direita */
+        }
+        .chat-avatar {
+            margin-right: 10px;
+        }
+        .chat-avatar img {
+            padding: 5px;
+            width: 25px; /* Ajusta o tamanho das fotos */
+            height: 25px; /* Ajusta o tamanho das fotos */
+            border-radius: 50%;
+            object-fit: cover; /* Garante que a imagem não distorça */
+        }
+        .chat-bubble {
+            max-width: 70%;
+            padding: 10px;
+            border-radius: 15px;
+            background-color: #e9ecef;
+            position: relative;
+            word-break: break-word;
+        }
+        .chat-bubble:before {
+            content: '';
+            position: absolute;
+            border-width: 10px;
+            border-style: solid;
+            border-color: #e9ecef00 transparent transparent transparent;
+            bottom: -15px;
+            left: 10px;
+        }
+        .chat-message.robot .chat-bubble {
+            background-color: #f1f1f1;
+        }
+        .chat-message.user .chat-bubble {
+            background-color: #007bff;
+            color: white;
+            align-self: flex-end;
+        }
+        .thinking-indicator {
+            font-size: 20px; /* Tamanho dos pontos */
+            color: #333; /* Cor dos pontos */
+            display: inline-block;
+            animation: blink 1s infinite;
+        }
+        @keyframes blink {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+        .thinking {
+            display: flex;
+            align-items: center;
+        }
+
+        /* Estilos para o formulário de feedback dentro do chat */
+        .feedback-form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        .feedback-form label {
+            font-weight: bold;
+        }
+        .feedback-form input, .feedback-form textarea {
+            padding: 10px;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+        .feedback-form button {
+            background-color: #007bff;
+            color: #ffffff;
+            border: none;
+            padding: 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .feedback-form button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Estilos para as estrelas de avaliação */
+        #star-rating {
+            display: flex;
+            justify-content: center;
+            gap: 5px;
+        }
+        .star {
+            font-size: 24px;
+            cursor: pointer;
+            color: #ccc;
+            transition: color 0.3s ease;
+        }
+        .star.filled {
+            color: gold;
+        }
+        
+        /* Estilos para as notificações */
+        .notification-card, .support-card {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            max-width: 90%;
+            z-index: 1000;
+            display: none; /* Inicialmente escondido */
+            text-align: center;
+            border: 2px solid; /* Default border color */
+            animation: fadeIn 0.3s ease-out;
+        }
+        .notification-card {
+            border-color: #28a745; /* Green border for success */
+        }
+        .support-card {
+            border-color: #f44336; /* Red border for alert */
+        }
+        .notification-card h2, .support-card h2 {
+            margin: 0;
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+        .notification-card p, .support-card p {
+            margin: 0;
+            font-size: 16px;
+        }
+        .notification-card button, .support-card button {
+            background-color: #007bff;
+            color: #ffffff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 15px;
+        }
+        .notification-card button:hover, .support-card button:hover {
+            background-color: #0056b3;
+        }
+        .notification-card .icon, .support-card .icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            margin: 0 auto 15px;
+            color: #ffffff;
+        }
+        .notification-card .icon {
+            background-color: #28a745; /* Green background for success */
+        }
+        .support-card .icon {
+            background-color: #f44336; /* Red background for alert */
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        small {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Pagamento com Pix</h1>
+        <div class="pix-info">
+            <p>Valor Total: <strong id="total-amount">R$ 0,00</strong></p>
+            <!-- Adicione esta linha onde você deseja exibir a imagem do QR code -->
+<img id="qr-code-image" src="" alt="QR Code" style="display: block; margin: 0 auto;">
+
+<!-- O textarea para o código -->
+
+            <div class="code-container">
+                <textarea id="pix-code" readonly></textarea>
+                <button class="copy-button" id="copy-btn">Copiar Código</button>
+            </div>
+            <small>Faça o pagamento escaneando o codigo QR, ou copiando a chave PIX aleatoria <br> e colando direto no seu app do Banco.</small>
+        </div>
+    </div>
+
+    <!-- Success Card -->
+    <div class="notification-card" id="notification-card">
+        <div class="icon">✔</div>
+        <h2>Sucesso</h2>
+        <p>Código Pix copiado para a área de transferência!</p>
+        <button id="close-notification">Fechar</button>
+    </div>
+
+    <!-- Alert Card -->
+    <div class="support-card" id="support-card">
+        <div class="icon">!</div>
+        <h2>Atenção</h2>
+        <p>Após o pagamento, por favor, clique no botão de suporte no canto direito e preencha o formulario.</p>
+        <button id="close-support">Fechar</button>
+    </div>
+
+    <!-- Support Button -->
+    <button class="support-button" id="support-btn" style="border-radius: 100%;"><img src="support.png" height="30" alt="suporte"></button>
+
+    <!-- Minichat -->
+    <div class="minichat" id="minichat">
+        <div class="minichat-header">
+            <h3>Suporte</h3>
+            <button class="close-btn" id="close-chat">✖</button>
+        </div>
+        <div class="minichat-body">
+            <!-- Mensagens de chat serão adicionadas aqui -->
+        </div>
+        <div class="minichat-footer">
+            <input type="text" id="chat-input" placeholder="Digite sua mensagem...">
+            <button id="send-msg">Enviar</button>
+        </div>
+    </div>
+
+    <script src="pix.js"></script>
+    <script src="chat.js"></script>
+    <script>
+        // Exemplo de como mostrar a notificação
+        function showNotification() {
+            document.getElementById('notification-card').style.display = 'block';
+        }
+
+        function showSupportCard() {
+            document.getElementById('support-card').style.display = 'block';
+        }
+
+        // Função para fechar as notificações
+        document.getElementById('close-notification').addEventListener('click', function() {
+            document.getElementById('notification-card').style.display = 'none';
+        });
+
+        document.getElementById('close-support').addEventListener('click', function() {
+            document.getElementById('support-card').style.display = 'none';
+        });
+
+        // Controle do minichat
+        document.getElementById('support-btn').addEventListener('click', function() {
+            const minichat = document.getElementById('minichat');
+            minichat.style.display = minichat.style.display === 'block' ? 'none' : 'block';
+        });
+
+        document.getElementById('close-chat').addEventListener('click', function() {
+            document.getElementById('minichat').style.display = 'none';
+        });
+
+        // Enviar mensagem no chat
+        document.getElementById('send-msg').addEventListener('click', function() {
+            const input = document.getElementById('chat-input');
+            if (input.value.trim()) {
+                const minichatBody = document.querySelector('.minichat-body');
+                const message = document.createElement('div');
+                message.classList.add('chat-message', 'user');
+                message.innerHTML = `<div class="chat-bubble">${input.value}</div>`;
+                minichatBody.appendChild(message);
+                input.value = '';
+                minichatBody.scrollTop = minichatBody.scrollHeight;
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,607 @@
+/* Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Estilos globais */
+body {
+    font-family: Arial, sans-serif;
+    color: #333;
+    line-height: 1.6;
+    overflow-x: hidden; /* Evitar rolagem horizontal */
+}
+
+/* Cabeçalho */
+header {
+    background: #333;
+    color: #fff;
+    padding: 10px 0;
+}
+
+header .container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Espaça logo, navegação e carrinho */
+}
+
+header h1 {
+    margin: 0;
+}
+
+.logo {
+    height: 50px; /* Ajuste a altura conforme necessário */
+}
+
+/* Estilo para o menu de navegação */
+nav {
+    flex-grow: 1; /* Faz com que o menu ocupe o espaço disponível entre a logo e o carrinho */
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    padding-left: 0;
+    margin: 0;
+    justify-content: center; /* Centraliza os links de navegação dentro do nav */
+}
+
+nav ul li {
+    margin: 0 10px;
+}
+
+nav ul li a {
+    color: #fff; /* Cor do texto do menu */
+    text-decoration: none;
+    font-weight: bold; /* Opcional: deixa o texto em negrito */
+}
+
+nav ul li a:hover {
+    color: #f4a261; /* Cor de destaque ao passar o mouse */
+}
+
+.cart-container {
+    position: relative;
+}
+
+#cart-btn {
+    background: #f39c12;
+    border: none;
+    color: #fff;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+}
+
+#cart-btn i {
+    margin-right: 5px;
+}
+
+.cart {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 100%;
+    background: #fff;
+    color: #333;
+    border: 1px solid #ddd;
+    padding: 10px;
+    width: 250px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.cart ul {
+    list-style: none;
+    padding: 0;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.cart ul li {
+    border-bottom: 1px solid #ddd;
+    padding: 5px 0;
+}
+
+.cart p {
+    font-weight: bold;
+}
+
+
+/* Produtos */
+.products {
+    padding: 20px;
+    background: #fff;
+}
+
+.products .container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Cria uma grid responsiva */
+    gap: 20px; /* Espaçamento entre os itens */
+}
+
+.product {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 300px; /* Define uma altura fixa para manter a consistência */
+}
+
+.product img {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+
+.product h3 {
+    margin: 10px 0;
+}
+
+/* Botão do produto */
+.product button {
+    background: #f39c12;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: auto;
+    margin: auto;
+}
+
+.product button:hover {
+    background: #555;
+}
+
+.product button::before {
+    content: "\1F6D2"; /* Símbolo de carrinho */
+    margin-right: 5px;
+}
+
+/* Rodapé */
+footer {
+    background: #333;
+    color: #fff;
+    padding: 20px 0;
+}
+
+footer .container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.footer-top {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.footer-logo {
+    flex: 1;
+    margin-right: 20px;
+}
+
+.footer-logo img {
+    height: 50px; /* Ajuste conforme necessário */
+}
+
+.footer-logo p {
+    margin: 10px 0 0;
+}
+
+.footer-nav,
+.footer-contact,
+.footer-social {
+    flex: 1;
+    margin-right: 20px;
+}
+
+.footer-nav ul,
+.footer-social {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-nav ul li,
+.footer-social a {
+    margin-bottom: 10px;
+}
+
+.footer-nav ul li a,
+.footer-social a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.footer-nav ul li a:hover,
+.footer-social a:hover {
+    color: #f4a261;
+}
+
+.footer-contact p {
+    margin-bottom: 10px;
+}
+
+.footer-social .social-icon {
+    font-size: 20px;
+    margin-right: 10px;
+}
+
+.footer-bottom {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.footer-bottom p {
+    margin: 0;
+}
+
+.footer-bottom a {
+    color: #f4a261;
+    text-decoration: none;
+}
+
+.footer-bottom a:hover {
+    text-decoration: underline;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .footer-top {
+        flex-direction: column;
+    }
+
+    .footer-logo,
+    .footer-nav,
+    .footer-contact,
+    .footer-social {
+        margin-right: 0;
+        margin-bottom: 20px;
+    }
+}
+
+
+/* Modal */
+.cart-modal {
+    display: none; /* Esconde o modal por padrão */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7); /* Sobreposição semitransparente */
+    z-index: 1000; /* Garante que o modal esteja acima de outros elementos */
+}
+
+.cart-modal-content {
+    background: #fff;
+    margin: 5% auto;
+    padding: 20px;
+    width: 90%;
+    max-width: 1000px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* Espaçamento entre os elementos */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.cart-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 24px;
+    cursor: pointer;
+    color: #333;
+}
+
+.modal-body {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.cart-items {
+    flex: 2;
+    overflow-y: auto;
+    max-height: 500px; /* Limita a altura para permitir rolagem */
+}
+
+.cart-items ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.cart-items li {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #ddd;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.cart-items img {
+    width: 80px;
+    height: auto;
+    margin-right: 10px;
+    border-radius: 5px;
+}
+
+.cart-items .item-info {
+    flex: 1;
+}
+
+.cart-items .item-info h5 {
+    margin: 0;
+    font-size: 16px;
+}
+
+.cart-items .item-info p {
+    margin: 5px 0;
+}
+
+.cart-items button {
+    background: #f39c12;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 14px;
+    margin-left: 5px;
+}
+
+.cart-items button:hover {
+    background: #e67e22;
+}
+
+.modal-actions {
+    flex: 1;
+    padding-left: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.coupon-card {
+    margin-bottom: 20px;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.coupon-card h4 {
+    margin-bottom: 10px;
+}
+
+.coupon-card input {
+    width: calc(100% - 90px);
+    padding: 10px;
+    margin-right: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.coupon-card button {
+    background: #f39c12;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.coupon-card button:hover {
+    background: #e67e22;
+}
+
+#checkout-btn {
+    background: #27ae60;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+    text-align: center;
+}
+
+#checkout-btn:hover {
+    background: #2ecc71;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .cart-modal-content {
+        width: 95%;
+    }
+
+    .modal-body {
+        flex-direction: column;
+    }
+
+    .modal-actions {
+        padding-left: 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .cart-items img {
+        width: 60px;
+    }
+    
+    .coupon-card input {
+        width: calc(100% - 60px);
+    }
+}
+/* Ajuste na margem inferior da seção de produtos */
+.products {
+    margin-bottom: 80px; /* Adicionado para evitar que produtos encostem no rodapé */
+}
+
+/* Estilo para a paginação */
+.pagination {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.pagination-btn {
+    background: #f4f4f4;
+    border: 1px solid #ddd;
+    color: #333;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin: 0 5px;
+}
+
+.pagination-btn.active {
+    background: #333;
+    color: #fff;
+}
+
+.pagination-btn:disabled {
+    background: #ddd;
+    cursor: not-allowed;
+}
+/* Aumentar o espaço vertical entre os produtos */
+.product {
+    margin-bottom: 40px; /* Aumentado para criar mais espaço entre os produtos */
+}
+
+/* Ajuste para garantir que o botão esteja dentro do card do produto */
+.product {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%; /* Ajustado para ocupar toda a altura do card */
+}
+
+.product button {
+    margin-top: auto; /* Garante que o botão fique na parte inferior do card */
+}
+
+/* Estilo básico do card */
+.discount-card {
+    position: fixed;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -20%);
+    padding: 20px;
+    background: #fff;
+    border: 2px solid #000;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    text-align: center;
+    font-family: Arial, sans-serif; /* Garantir uma fonte legível */
+    border-radius: 10px; /* Bordas arredondadas para um visual mais suave */
+}
+
+.discount-content {
+    margin-bottom: 20px;
+}
+
+.discount-confetti {
+    /* Adicione os estilos para o efeito de confete aqui */
+    width: 100%;
+    height: 100%;
+    background: url('confetti-image.png') no-repeat center center;
+    background-size: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    /* Você pode usar bibliotecas de confete para efeitos mais complexos */
+}
+
+
+
+/* Animação de fade-in */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Estilo do container do card para centralização */
+#card-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.5); /* Fundo semitransparente */
+    z-index: 1000;
+}
+
+/* Estilo do card */
+#congratulations-card {
+    padding: 30px;
+    background-color: #fff;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    width: 300px;
+    max-width: 90%;
+    font-family: Arial, sans-serif;
+    color: #333;
+    border: 1px solid #ddd;
+    box-sizing: border-box;
+    animation: fadeIn 0.5s forwards;
+}
+
+/* Estilo para o título do card */
+#congratulations-card h2 {
+    font-size: 24px;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+/* Estilo para os parágrafos do card */
+#congratulations-card p {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+/* Estilo para o botão do card */
+#congratulations-card button {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease-in-out;
+}
+
+/* Estilo para o botão ao passar o mouse */
+#congratulations-card button:hover {
+    background-color: #218838;
+}
+
